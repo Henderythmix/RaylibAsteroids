@@ -20,12 +20,18 @@ class Player {
         float Vel = 0;
         float Acc = 0;
         float rotation = 0;
+        float Dec = -2;
 
         void Update() {
             Acc = 2*IsJoystick(LVertical);
             rotation += IsJoystick(LHorizontal)*4*GetFrameTime();
 
-            if (Acc == 0) { Vel /= 1.05;
+            if (Acc == 0) { 
+                if (Vel < 0) {
+                    Vel -= Dec;
+                } else {
+                    Vel -= -Dec;
+                }
             } else { Vel += Acc;
             }
             X += cos(rotation) * Vel * GetFrameTime();
